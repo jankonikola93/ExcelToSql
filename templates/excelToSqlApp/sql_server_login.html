@@ -1,0 +1,57 @@
+{% extends "excelToSqlApp/layout.html" %}
+{% block title %}
+Sql Login
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h3 class="text-green">Connect to SQL Server</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-green">{{ form.ip_address.label}}</span>
+                    </div>
+                    {{ form.ip_address }}
+                </div>
+                {% if form.ip_address.errors %}
+                {% for error in form.ip_address.errors %}
+                <p class="text-danger">{{ error|escape }}</p>
+                {% endfor %}
+                {% endif %}
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-green">{{ form.username.label}}</span>
+                    </div>
+                    {{ form.username }}
+                </div>
+                {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                <p class="text-danger">{{ error|escape }}</p>
+                {% endfor %}
+                {% endif %}
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-green">{{ form.password.label}}</span>
+                    </div>
+                    {{ form.password }}
+                </div>
+                {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                <p class="text-danger">{{ error|escape }}</p>
+                {% endfor %}
+                {% endif %}
+
+                <input class="btn btn-success btn-block bg-green" value="Connect" type="submit" />
+            </form>
+            {% load static %}
+            <script src="{% static 'excelToSqlApp/js/custom/sql_server_login.js' %}"></script>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock %}

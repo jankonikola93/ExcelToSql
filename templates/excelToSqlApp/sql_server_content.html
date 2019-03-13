@@ -1,0 +1,31 @@
+{% extends "excelToSqlApp/layout.html" %}
+{% block title %}
+Sql server explorer
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-columns">
+    {% for db in databases %}
+    <div class="card">
+        <div class="card-body">
+            <div class="media">
+                <a class="d-flex" href="{% url 'connecttosqldb' db %}">
+                    <img src="{% static 'excelToSqlApp/images/icons8-database-64.png' %}" alt="db" class="align-self-center mr-3">
+                </a>
+                <div class="media-body">
+                    <br />
+                    <a class="database-link" href="{% url 'connecttosqldb' db %}">
+                        <h5>{{db}}</h5>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}  
+</div>
+    </div>
+</div>
+
+{% endblock %}

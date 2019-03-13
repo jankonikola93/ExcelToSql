@@ -1,0 +1,62 @@
+{% extends "excelToSqlApp/layout.html" %}
+{% block title %}
+Database explorer
+{% endblock %}
+{% block content %}
+{% load static %}
+{% load render_partial %}
+<div class="row">
+    <div class="col-md-4">
+        <span class="text-xl">
+            <img src="{% static 'excelToSqlApp/images/icons8-database-64.png' %}" alt="db" class="mr-1">
+            {{database_name}}
+        </span>
+        <p class="mt-3 border border-success border-top-0 border-left-0 border-right-0">
+            <a class="tables-link text-xl" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+                Tables
+            </a>
+        </p>
+        <div class="collapse show" id="tables">
+            <ul>
+                {% for t in tables %}
+                <li>{{t}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-8">
+
+        <div id="accordion">
+
+            <div class="card">
+                <div class="card-header p-0">
+                    <a class="btn btn-success bg-green btn-lg btn-block m-0" data-toggle="collapse" href="#collapseOne">
+                        Create new table from excel
+                    </a>
+                </div>
+                <div id="collapseOne" class="collapse" data-parent="#accordion">
+                    <div id="panel_create_table" class="card-body">
+                        {% render_partial 'createsqltable' %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header p-0">
+                    <a class="collapsed btn btn-primary btn-lg btn-block m-0" data-toggle="collapse" href="#collapseTwo">
+                        Update existing table from excel
+                    </a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <div id="panel_update_table" class="card-body">
+                        {% render_partial 'updatesqltable' %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script src="{% static 'excelToSqlApp/js/custom/sql_server_db_tables.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,27 @@
+.body-content{
+    margin-top: 100px;
+}
+.bg-green{
+    background-color: #008040;
+    color: #ffffff;
+}
+.text-green{
+    color: #008040;
+}
+.database-link{
+    color: #000000;
+}
+.database-link:hover{
+    color: #008040;
+    text-decoration: none;
+    text-decoration-style: none;
+}
+.tables-link{
+    color: #008040;
+}
+.tables-link:hover{
+    color: #008040;
+}
+.text-xl{
+    font-size: x-large;
+}

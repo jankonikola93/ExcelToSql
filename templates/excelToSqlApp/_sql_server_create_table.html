@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <form id="frm_create_table" method="POST" enctype="multipart/form-data" action="{% url 'createsqltable' %}">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-green">{{ form.table_name.label}}</span>
+                </div>
+                {{ form.table_name }}
+            </div>
+            {% if form.table_name.errors %}
+            {% for error in form.table_name.errors %}
+            <p class="text-danger">{{error|escape}}</p>
+            {% endfor %}
+            {% endif %}
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-green">{{ form.excel_file.label}}</span>
+                </div>
+                <div class="custom-file">
+                    {{ form.excel_file }}
+                    <label id="lblFile" class="custom-file-label" for="id_excel_file">Choose excel file</label>
+                </div>
+
+            </div>
+            {% if form.excel_file.errors %}
+            {% for error in form.excel_file.errors %}
+            <p class="text-danger">{{error|escape}}</p>
+            {% endfor %}
+            {% endif %}
+            <div class="float-right">
+                <input class="btn btn-success bg-green" value="Create table" type="submit" />
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#id_table_name').addClass('form-control');
+        $("#id_excel_file").on("change", function () {
+            var files = $(this).prop('files');
+            var names = $.map(files, function (val) { return val.name; });
+            if (names.toString().length > 50) {
+                $("#lblFile").text(names.toString().substring(0, 50) + "...");
+            }
+            else {
+                $("#lblFile").text(names.toString());
+            }
+
+        });
+    });
+
+</script>
